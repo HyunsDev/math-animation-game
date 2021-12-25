@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>수학 애니메이션 게임</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.4.0/lib/p5.js"></script>
+    <script src="https://unpkg.com/phosphor-icons"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="sketch.js"></script>
+</head>
+<body>
+    <div id="btns">
+        <div class="btn" id="top"><i class="ph-arrow-up"></i></div>
+        <div class="btn" id="top-right"><i class="ph-arrow-up-right"></i></div>
+        <div class="btn" id="right"><i class="ph-arrow-right"></i></div>
+        <div class="btn" id="bottom-right"><i class="ph-arrow-down-right"></i></div>
+        <div class="btn" id="bottom"><i class="ph-arrow-down"></i></div>
+        <div class="btn" id="bottom-left"><i class="ph-arrow-down-left"></i></div>
+        <div class="btn" id="left"><i class="ph-arrow-left"></i></div>
+        <div class="btn" id="top-left"><i class="ph-arrow-up-left"></i></div>
+        <div class="btn" id="stop"><i class="ph-stop"></i></div>
+    </div>
+    <div id="output" oncontextmenu='return false'>
+        <div class="box">
+            <div id="result"><i class="ph-gauge"></i> 0cm/s</div>
+            <div id="reset" onclick="reset()"><i class="ph-clock-clockwise"></i></div>
+        </div>
+        <div id="tex"></div>
+    </div>
+    <div id="canvas"></div>
+    <script src="script.js"></script>
+</body>
+</html>

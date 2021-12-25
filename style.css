@@ -1,0 +1,226 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;900&family=Roboto:wght@700&display=swap");
+* {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  padding: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: 'Noto Sans KR', sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  position: fixed;
+  background-color: #f2f4f7;
+}
+
+#btns {
+  width: 192px;
+  height: 192px;
+  position: fixed;
+  bottom: 32px;
+  left: calc(50vw - 96px);
+  overflow: hidden;
+}
+
+#btns .btn {
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  border-radius: 32px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  color: #04142b;
+  font-size: 32px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+#btns .btn i {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-transition: 200ms;
+  transition: 200ms;
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+  background-color: rgba(217, 221, 228, 0.3);
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
+}
+
+#btns .btn i:active {
+  background-color: rgba(217, 221, 228, 0.3);
+}
+
+#btns #top {
+  top: 0px;
+  left: 64px;
+}
+
+#btns #top-right {
+  top: 0;
+  right: 0;
+}
+
+#btns #right {
+  top: 64px;
+  right: 0;
+}
+
+#btns #bottom-right {
+  bottom: 0px;
+  right: 0px;
+}
+
+#btns #bottom {
+  bottom: 0;
+  left: 64px;
+}
+
+#btns #bottom-left {
+  bottom: 0;
+  left: 0;
+}
+
+#btns #left {
+  top: 64px;
+  left: 0;
+}
+
+#btns #top-left {
+  top: 0;
+  left: 0;
+}
+
+#btns #stop {
+  top: 64px;
+  left: 64px;
+}
+
+#output {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 14px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  color: #04142b;
+}
+
+#output .box {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 40px;
+}
+
+#output #result {
+  padding-left: 16px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  border-radius: 8px;
+  background-color: rgba(217, 221, 228, 0.3);
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
+  height: 100%;
+}
+
+#output #result i {
+  font-size: 20px;
+  margin-bottom: -8px;
+  margin-right: 4px;
+}
+
+#output #reset {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-left: 8px;
+  border-radius: 8px;
+  background-color: rgba(217, 221, 228, 0.3);
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
+  font-size: 24px;
+  min-width: 40px;
+  height: 40px;
+}
+
+#output #tex {
+  padding-left: 8px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  border-radius: 8px;
+  background-color: rgba(217, 221, 228, 0.3);
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
+  margin-top: 8px;
+  height: 96px;
+}
+
+#canvas {
+  overflow: hidden;
+}
+
+#canvas canvas {
+  overflow: hidden;
+}
+/*# sourceMappingURL=style.css.map */
