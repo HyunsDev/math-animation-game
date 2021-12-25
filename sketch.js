@@ -69,11 +69,11 @@ const sketch = function (p) {
 
         if (character.x_speed == 0 && character.y_speed == 0 && character.x_accel == 0 && character.y_accel == 0 ) {
             if (character.x_direction == "left") {
-                p.image(animation.still[isStand() ? 0 : p.frameCount%10], realX(character.x), realY(character.y), 50, 60)
+                p.image(animation.still[p.frameCount%10], realX(character.x), realY(character.y), 50, 60)
             } else {
                 p.push()
                 p.scale(-1, 1)
-                p.image(animation.still[isStand() ? 0 : p.frameCount%10], realX(character.x) * -1 - 70, realY(character.y), 50, 60)
+                p.image(animation.still[p.frameCount%10], realX(character.x) * -1 - 70, realY(character.y), 50, 60)
                 p.pop()
             }
         } else {
