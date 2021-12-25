@@ -9,9 +9,12 @@ let character = {
     y_direction: "front",
     isWalk: false
 }
+let length = 0
 
 const realX = (x) => $(window).width()/2 - 20 + x
 const realY = (y) => $(window).height()/2 - 100 + y
+
+const isStand = () => character.x_accel == 0 && character.y_accel == 0
 
 // =========[ config ]=========
 const speed_limit = {
@@ -34,6 +37,8 @@ let animation = {
 }
 
 let history = []
+
+let tex = 0
 
 const sketch = function (p) {
     p.preload = function() {
@@ -64,20 +69,20 @@ const sketch = function (p) {
 
         if (character.x_speed == 0 && character.y_speed == 0 && character.x_accel == 0 && character.y_accel == 0 ) {
             if (character.x_direction == "left") {
-                p.image(animation.still[p.frameCount%10], realX(character.x), realY(character.y), 50, 60)
+                p.image(animation.still[isStand() ? 0 : p.frameCount%10], realX(character.x), realY(character.y), 50, 60)
             } else {
                 p.push()
                 p.scale(-1, 1)
-                p.image(animation.still[p.frameCount%10], realX(character.x) * -1 - 70, realY(character.y), 50, 60)
+                p.image(animation.still[isStand() ? 0 : p.frameCount%10], realX(character.x) * -1 - 70, realY(character.y), 50, 60)
                 p.pop()
             }
         } else {
             if (character.x_direction == "left") {
-                p.image(animation[character.y_direction==="front" ? "walk" : "walk_back"][p.frameCount%10], $(window).width()/2 - 20 + character.x, $(window).height()/2 - 100 + character.y, 50, 60)
+                p.image(animation[character.y_direction==="front" ? "walk" : "walk_back"][isStand() ? 0 : p.frameCount%10], $(window).width()/2 - 20 + character.x, $(window).height()/2 - 100 + character.y, 50, 60)
             } else {
                 p.push()
                 p.scale(-1, 1)
-                p.image(animation[character.y_direction==="front" ? "walk" : "walk_back"][p.frameCount%10], ($(window).width()/2 - 20 + character.x) * -1 - 70, $(window).height()/2 - 100 + character.y, 50, 60)
+                p.image(animation[character.y_direction==="front" ? "walk" : "walk_back"][isStand() ? 0 : p.frameCount%10], ($(window).width()/2 - 20 + character.x) * -1 - 70, $(window).height()/2 - 100 + character.y, 50, 60)
                 p.pop()
             }
         }
@@ -85,14 +90,25 @@ const sketch = function (p) {
 
         character.x_speed += (Math.abs(character.x_speed + character.x_accel) <= speed_limit.x ? character.x_accel : 0)
         character.y_speed += (Math.abs(character.y_speed + character.y_accel) <= speed_limit.y ? character.y_accel : 0)
-        character.x += (realX(character.x)+character.x_speed+40 >= 0 && realX(character.x)+character.x_speed+40 <= $(window).width()) ? character.x_speed : 0
-        character.y += (realY(character.y)+character.y_speed+40 >= 0 && realY(character.y)+character.y_speed+50 <= $(window).height()) ? character.y_speed : 0
+
+        if (realX(character.x)+character.x_speed+40 >= 0 && realX(character.x)+character.x_speed+40 <= $(window).width()) {
+            character.x += character.x_speed
+        } else {
+            character.x_speed = 0
+            character.x_accel = 0
+        }
+
+        if (realY(character.y)+character.y_speed+40 >= 0 && realY(character.y)+character.y_speed+50 <= $(window).height()) {
+            character.y += character.y_speed
+        } else {
+            character.y_speed = 0
+            character.y_accel = 0
+        }
+
         history.push({x: character.x, y: character.y})
 
-        $("#result").html(`<i class="ph-gauge"></i> ${Math.sqrt(character.x_speed**2 + character.y_speed**2)}cm/s`)
-
-
-        // DEBUG
-        $("#tex").html(`(${character.x_accel}, ${character.y_accel}) (${character.x_speed}, ${character.y_speed}) (${character.x}, ${character.y})`)
+        length += Math.round(Math.sqrt((character.x - last_history.x)**2 + (character.y - last_history.y)**2))
+        $("#result").html(`<i class="ph-gauge"></i> ${Math.round(Math.sqrt(character.x_speed**2 + character.y_speed**2))}cm/s <i class="ph-ruler"></i> ${length/10}cm <i class="ph-crosshair"></i>(${character.x}, ${character.y})`)
+        // $("#tex").html(`$$$${tex} = ${length}$$$`)
     }
 }

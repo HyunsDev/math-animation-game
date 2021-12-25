@@ -20,6 +20,8 @@ const reset = () => {
 
     history = []
 
+    length = 0
+
     canvas.remove()
     canvas = new p5(sketch, "canvas");
 }
