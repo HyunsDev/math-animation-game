@@ -1,27 +1,5 @@
 let canvas = new p5(sketch, "canvas");
 const reset = () => {
-    character = {
-        x: 0,
-        y: 0,
-        x_speed: 0,
-        y_speed: 0,
-        x_accel: 0,
-        y_accel: 0,
-        x_direction: "right",
-        y_direction: "front",
-        isWalk: false
-    }
-
-    animation = {
-        still: [],
-        walk: [],
-        walk_back: []
-    }
-
-    history = []
-
-    length = 0
-
     canvas.remove()
     canvas = new p5(sketch, "canvas");
 }

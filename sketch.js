@@ -9,6 +9,10 @@ let character = {
     y_direction: "front",
     isWalk: false
 }
+let before_speed = {
+    x: 0,
+    y: 0
+}
 let length = 0
 
 const realX = (x) => $(window).width()/2 - 20 + x
@@ -38,19 +42,50 @@ let animation = {
 
 let history = []
 
-let tex = 0
+let tex = "0 "
+let renderTex = true
+let renderTimer
+let renderFrame = 0
 
 const sketch = function (p) {
     p.preload = function() {
+        animation = {
+            still: [],
+            walk: [],
+            walk_back: []
+        }
+
         for (i of Object.keys(animation)) {
             for (let ii = 0; ii < 10; ii++) {
-                console.log(`[Load Image] ./assets/${i}/${ii}.png`)
                 animation[i].push(p.loadImage(`./assets/${i}/${ii}.png`))
             }
         }
+        
     }
 
     p.setup = function () {
+        character = {
+            x: 0,
+            y: 0,
+            x_speed: 0,
+            y_speed: 0,
+            x_accel: 0,
+            y_accel: 0,
+            x_direction: "right",
+            y_direction: "front",
+            isWalk: false
+        }
+    
+        history = []
+        length = 0
+
+        tex = ""
+        renderTex = true
+        renderTimer
+        renderFrame = 0
+
+        $("#tex").html("")
+
         p.createCanvas($(window).width(), $( window ).height())
         p.frameRate(10)
     }
@@ -62,9 +97,11 @@ const sketch = function (p) {
 
         let last_history = {x: 0, y: 0}
         history.forEach(e => {
-            p.line(realX(last_history.x)+lineSync.x, realY(last_history.y)+lineSync.y, realX(e.x)+lineSync.x, realY(e.y)+lineSync.y)
-            last_history.x = e.x
-            last_history.y = e.y
+            if (last_history.x != e.x || last_history.y != e.y) {
+                p.line(realX(last_history.x)+lineSync.x, realY(last_history.y)+lineSync.y, realX(e.x)+lineSync.x, realY(e.y)+lineSync.y)
+                last_history.x = e.x
+                last_history.y = e.y
+            }
         })
 
         if (character.x_speed == 0 && character.y_speed == 0 && character.x_accel == 0 && character.y_accel == 0 ) {
@@ -105,10 +142,26 @@ const sketch = function (p) {
             character.y_accel = 0
         }
 
+        if (before_speed.x != character.x_speed || before_speed.y != character.y_speed) {
+            tex += `+ \\int _{ ${renderFrame/10} }^{ ${p.frameCount/10} }{ (\\sqrt{(${character.x_speed})^{2} + (${character.y_speed})^{2}})dx } `
+            renderFrame = p.frameCount
+        }
+
+        if ((character.x_accel != 0 || character.y_accel != 0)) {
+            clearTimeout(renderTimer)
+            renderTimer = setTimeout(() => {
+                $("#tex").html(`$$$... ${tex} = ${length/10}$$$`)
+                tex = ""
+                MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+            }, 500)
+        }
+
+        before_speed.x = character.x_speed
+        before_speed.y = character.y_speed
+
         history.push({x: character.x, y: character.y})
 
         length += Math.round(Math.sqrt((character.x - last_history.x)**2 + (character.y - last_history.y)**2))
         $("#result").html(`<i class="ph-gauge"></i> ${Math.round(Math.sqrt(character.x_speed**2 + character.y_speed**2))}cm/s <i class="ph-ruler"></i> ${length/10}cm <i class="ph-crosshair"></i>(${character.x}, ${character.y})`)
-        // $("#tex").html(`$$$${tex} = ${length}$$$`)
     }
 }
