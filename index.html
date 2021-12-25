@@ -10,6 +10,12 @@
     <script src="https://unpkg.com/phosphor-icons"></script>
     <link rel="stylesheet" href="style.css">
     <script src="sketch.js"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({            
+            tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}            
+        });
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
 </head>
 <body>
     <div id="btns">
@@ -25,7 +31,7 @@
     </div>
     <div id="output" oncontextmenu='return false'>
         <div class="box">
-            <div id="result"><i class="ph-gauge"></i> 0cm/s</div>
+            <div id="result"><i class="ph-gauge"></i> 0cm/s <i class="ph-ruler"></i> 00m</div>
             <div id="reset" onclick="reset()"><i class="ph-clock-clockwise"></i></div>
         </div>
         <div id="tex"></div>
